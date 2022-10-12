@@ -1,6 +1,7 @@
 import 'package:examen/models/job.dart';
-import 'package:flutter/material.dart';
+import 'package:examen/screens/widgets/job_detail.dart';
 import 'package:examen/screens/widgets/job_item.dart';
+import 'package:flutter/material.dart';
 
 class JobList extends StatelessWidget {
   final jobList = Job.generateJobs();
@@ -17,7 +18,16 @@ class JobList extends StatelessWidget {
               horizontal: 25,
             ),
             scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) => JobItem(jobList[index]),
+            itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        isScrollControlled: true,
+                        context: context,
+                        builder: ((context) => JobDetail(jobList[index])));
+                  },
+                  child: JobItem(jobList[index]),
+                ),
             separatorBuilder: (_, index) => SizedBox(
                   width: 15,
                 ),

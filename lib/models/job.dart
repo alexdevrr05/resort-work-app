@@ -30,7 +30,7 @@ class Job {
         ],
       ),
       Job(
-        'Guacamaya',
+        'Airbnb',
         'images/airbnb_logo.png',
         false,
         'Full time',
@@ -42,7 +42,7 @@ class Job {
         ],
       ),
       Job(
-        'Developer Frontend',
+        'Linkedin',
         'images/linkedin_logo.png',
         false,
         'Principle Product Desing',
