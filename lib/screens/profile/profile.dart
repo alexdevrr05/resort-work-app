@@ -1,3 +1,4 @@
+import 'package:examen/screens/profile/widgets/profile_input.dart';
 import 'package:examen/screens/profile/widgets/profile_top_banner.dart';
 import 'package:flutter/material.dart';
 
@@ -54,19 +55,30 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 70),
+              SizedBox(
+                height: 50,
+              ),
+              Row(
+                children: [
+                  SizedBox(height: 70),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ProfileInput('Username', ''),
+                      ProfileInput('Email', ''),
+                      ProfileInput('Phone', ''),
+                      ProfileInput('Gender', ''),
+                      ProfileInput('Date of birth', ''),
+                    ],
+                  ),
+                ],
+              ),
               Container(
-                  child: Expanded(
-                flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Username'),
-                    Text('Email'),
-                  ],
+                child: Expanded(
+                  flex: 2,
+                  child: Container(),
                 ),
-              )),
-              Container(),
+              ),
             ],
           ),
         ],
