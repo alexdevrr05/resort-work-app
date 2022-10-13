@@ -1,10 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:examen/screens/search/widgets/search_top_banner.dart';
 
-class Search extends StatelessWidget {
-  const Search({super.key});
-
+class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Stack(
+        children: [
+          Row(
+            // white space
+            children: [
+              Expanded(
+                flex: 2,
+                child: Container(),
+              ),
+              // grey espace
+              Expanded(
+                flex: 1,
+                child: Container(
+                  color: Colors.grey.withOpacity(0.1),
+                ),
+              )
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SearchTopBanner(),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

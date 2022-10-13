@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:examen/constants/colors.dart';
 import 'package:examen/screens/widgets/home_app_bar.dart';
 import 'package:examen/screens/widgets/job_list.dart';
 import 'package:examen/screens/widgets/search_card.dart';
@@ -15,7 +14,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackground,
       body: Stack(
         children: [
           Row(
