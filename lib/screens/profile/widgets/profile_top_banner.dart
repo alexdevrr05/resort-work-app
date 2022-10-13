@@ -5,8 +5,8 @@ class ProfileTopBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.only(
-            // top: MediaQuery.of(context).padding.top,
-            top: 25,
+            top: MediaQuery.of(context).padding.top,
+            // top: 25,
             left: 25,
             right: 25),
         child: Row(

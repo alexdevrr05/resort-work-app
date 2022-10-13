@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:examen/models/job.dart';
 import 'package:examen/widgets/icon_text.dart';

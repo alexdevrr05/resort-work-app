@@ -5,7 +5,7 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        top: 25,
+        top: MediaQuery.of(context).padding.top,
         left: 25,
         right: 25,
       ),

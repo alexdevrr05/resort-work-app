@@ -19,7 +19,7 @@ class Job {
     return [
       Job(
         'Google LLC',
-        'images/google_logo.png',
+        'assets/images/google_logo.png',
         true,
         'Full time',
         'Pto. Vallarta Jalisco',
@@ -31,7 +31,7 @@ class Job {
       ),
       Job(
         'Airbnb',
-        'images/airbnb_logo.png',
+        'assets/images/airbnb_logo.png',
         false,
         'Full time',
         'Pto. Vallarta Jalisco',
@@ -43,7 +43,7 @@ class Job {
       ),
       Job(
         'Linkedin',
-        'images/linkedin_logo.png',
+        'assets/images/linkedin_logo.png',
         false,
         'Principle Product Desing',
         'Pto. Vallarta Jalisco',

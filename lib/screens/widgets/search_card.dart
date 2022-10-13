@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:examen/screens/search/search.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,7 @@ class SearchCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           image: DecorationImage(
               image: AssetImage(
-                'images/search_bg.png',
+                'assets/images/search_bg.png',
               ),
               fit: BoxFit.cover)),
       child: Column(
@@ -49,7 +48,8 @@ class SearchCard extends StatelessWidget {
               child: Row(
                 children: [
                   Image.asset(
-                    '/icons/search.png',
+                    'assets/icons/search.png',
+                    
                     // '/icons/workspace.jpg',
                     width: 20,
                   ),
