@@ -1,4 +1,3 @@
-
 import 'package:examen/screens/search/search.dart';
 import 'package:flutter/material.dart';
 
@@ -49,8 +48,6 @@ class SearchCard extends StatelessWidget {
                 children: [
                   Image.asset(
                     'assets/icons/search.png',
-                    
-                    // '/icons/workspace.jpg',
                     width: 20,
                   ),
                   SizedBox(width: 10),
