@@ -1,3 +1,4 @@
+import 'package:examen/screens/profile/profile.dart';
 import 'package:flutter/material.dart';
 
 import 'package:examen/screens/widgets/home_app_bar.dart';
@@ -56,6 +57,11 @@ class _HomePageState extends State<HomePage> {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent),
         child: BottomNavigationBar(
+          onTap: (value) {
+            if (value == 4)
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => ProfilePage()));
+          },
           showSelectedLabels: false,
           showUnselectedLabels: false,
           selectedItemColor: Theme.of(context).primaryColor,
