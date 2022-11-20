@@ -1,3 +1,4 @@
+import 'package:examen/constants/colors.dart';
 import 'package:examen/widgets/icon_text.dart';
 import 'package:flutter/material.dart';
 // Model
@@ -11,12 +12,18 @@ class JobItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final widthSize = MediaQuery.of(context).size.width;
+    final hightSize = MediaQuery.of(context).size.height;
+
+    bool isDesktop(BuildContext context) => widthSize >= 600;
+    bool isMobile(BuildContext context) => widthSize < 600;
+
     return Container(
       width: 270,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
-        color: Colors.white,
+        color: isMobile(context) ? Colors.white : kSecundaryDark,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +58,9 @@ class JobItem extends StatelessWidget {
                   job.isMark ? Icons.bookmark : Icons.bookmark_outline_outlined,
                   color: job.isMark
                       ? Theme.of(context).primaryColor
-                      : Colors.black)
+                      : isDesktop(context)
+                          ? Colors.white
+                          : Colors.black)
             ],
           ),
           SizedBox(
@@ -60,8 +69,8 @@ class JobItem extends StatelessWidget {
           Text(
             job.title,
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
+                fontWeight: FontWeight.bold,
+                color: isDesktop(context) ? Colors.grey.shade300 : null),
           ),
           SizedBox(
             height: 15,

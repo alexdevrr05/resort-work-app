@@ -1,3 +1,4 @@
+import 'package:examen/constants/colors.dart';
 import 'package:examen/screens/profile/profile.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final widthSize = MediaQuery.of(context).size.width;
+    final hightSize = MediaQuery.of(context).size.height;
+
+    bool isDesktop(BuildContext context) => widthSize >= 600;
+    bool isMobile(BuildContext context) => widthSize < 600;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -22,13 +29,17 @@ class _HomePageState extends State<HomePage> {
             children: [
               Expanded(
                 flex: 2,
-                child: Container(),
+                child: Container(
+                  color: isDesktop(context) ? kSecundaryDark : null,
+                ),
               ),
               // grey espace
               Expanded(
                 flex: 1,
                 child: Container(
-                  color: Colors.grey.withOpacity(0.1),
+                  color: isDesktop(context)
+                      ? Colors.black
+                      : Colors.grey.withOpacity(0.1),
                 ),
               )
             ],
@@ -64,12 +75,15 @@ class _HomePageState extends State<HomePage> {
           },
           showSelectedLabels: false,
           showUnselectedLabels: false,
+          backgroundColor: isDesktop(context) ? kSecundaryDark : null,
           selectedItemColor: Theme.of(context).primaryColor,
+          unselectedItemColor: isDesktop(context) ? Colors.white : null,
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
               label: 'Home',
               icon: Icon(
+                // color: Colors.white,
                 Icons.home,
                 size: 20,
               ),

@@ -4,6 +4,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final widthSize = MediaQuery.of(context).size.width;
+    final hightSize = MediaQuery.of(context).size.height;
+
+    bool isDesktop(BuildContext context) => widthSize >= 600;
+    bool isMobile(BuildContext context) => widthSize < 600;
+
     return Container(
       padding: EdgeInsets.only(
         top: MediaQuery.of(context).padding.top,
@@ -18,8 +24,9 @@ class HomeAppBar extends StatelessWidget {
             children: [
               Text(
                 AppLocalizations.of(context)!.welcome,
-                style:
-                    TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: isDesktop(context) ? Colors.white : Colors.grey,
+                    fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 10,
@@ -27,6 +34,7 @@ class HomeAppBar extends StatelessWidget {
               Text(
                 'Alex Ramírez',
                 style: TextStyle(
+                  color: isDesktop(context) ? Colors.grey.shade300 : null,
                   fontWeight: FontWeight.bold,
                   fontSize: 28,
                 ),
