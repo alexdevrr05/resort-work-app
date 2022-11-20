@@ -27,7 +27,7 @@ class ProfileInput extends StatelessWidget {
                         child: Text(
                           labelText,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17),
+                               fontSize: 17, color: Colors.grey.shade300),
                         ),
                         padding: EdgeInsets.only(top: 15, bottom: 5),
                         width: 300,

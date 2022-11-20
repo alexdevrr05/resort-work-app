@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeAppBar extends StatelessWidget {
   @override
@@ -16,7 +17,7 @@ class HomeAppBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Welcome home',
+                AppLocalizations.of(context)!.welcome,
                 style:
                     TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
               ),

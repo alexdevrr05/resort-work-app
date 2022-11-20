@@ -2,6 +2,8 @@ import 'package:examen/screens/profile/widgets/profile_input.dart';
 import 'package:examen/screens/profile/widgets/profile_top_banner.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -64,11 +66,11 @@ class ProfilePage extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ProfileInput('Username', ''),
-                      ProfileInput('Email', ''),
-                      ProfileInput('Phone', ''),
-                      ProfileInput('Gender', ''),
-                      ProfileInput('Date of birth', ''),
+                      ProfileInput(AppLocalizations.of(context)!.username, ''),
+                      ProfileInput(AppLocalizations.of(context)!.phone,''),
+                      ProfileInput(AppLocalizations.of(context)!.email,''),
+                      ProfileInput(AppLocalizations.of(context)!.gender,''),
+                      ProfileInput(AppLocalizations.of(context)!.date,''),
                     ],
                   ),
                 ],

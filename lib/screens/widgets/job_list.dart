@@ -4,10 +4,10 @@ import 'package:examen/screens/widgets/job_item.dart';
 import 'package:flutter/material.dart';
 
 class JobList extends StatelessWidget {
-  final jobList = Job.generateJobs();
 
   @override
   Widget build(BuildContext context) {
+  final jobList = Job.generateJobs(context);
     return Container(
         margin: EdgeInsets.symmetric(
           vertical: 25,

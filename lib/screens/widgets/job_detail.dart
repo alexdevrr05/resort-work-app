@@ -3,6 +3,8 @@ import 'package:examen/models/job.dart';
 import 'package:examen/widgets/icon_text.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class JobDetail extends StatelessWidget {
   final Job job;
   JobDetail(this.job);
@@ -89,7 +91,7 @@ class JobDetail extends StatelessWidget {
                   height: 30,
                 ),
                 Text(
-                  'Requirements',
+                  AppLocalizations.of(context)!.requirements,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -141,7 +143,8 @@ class JobDetail extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10)),
                         elevation: 0,
                         backgroundColor: Theme.of(context).primaryColor),
-                    child: Text('Apply now'),
+                    child: Text(AppLocalizations.of(context)!.applyNow),
+                    
                   ),
                 ),
               ],

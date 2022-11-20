@@ -1,6 +1,8 @@
 import 'package:examen/screens/search/search.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class SearchCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -23,12 +25,14 @@ class SearchCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Fast search',
+            AppLocalizations.of(context)!.cardTitle,
             style: TextStyle(color: Colors.white, fontSize: 26),
           ),
           SizedBox(height: 10),
           Text(
-            'You can search quickly for\nthe job you want',
+            
+          AppLocalizations.of(context)!.cardSubtitle,
+            // 'You can search quickly for\nthe job you want',
             style: TextStyle(
                 height: 1.6, color: Colors.white, fontWeight: FontWeight.w400),
           ),
@@ -52,7 +56,7 @@ class SearchCard extends StatelessWidget {
                   ),
                   SizedBox(width: 10),
                   Text(
-                    'Search',
+                    AppLocalizations.of(context)!.cardSearch,
                     style: TextStyle(color: Colors.grey, fontSize: 18),
                   )
                 ],

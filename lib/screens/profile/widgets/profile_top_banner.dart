@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ProfileTopBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class ProfileTopBanner extends StatelessWidget {
               ),
             ),
             Text(
-              'Edit Profile',
+              AppLocalizations.of(context)!.editProfile,
               style:
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             ),
@@ -38,7 +40,7 @@ class ProfileTopBanner extends StatelessWidget {
                   child: Stack(
                     children: [
                       Text(
-                        'SAVE',
+                        AppLocalizations.of(context)!.save,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white),
                       )

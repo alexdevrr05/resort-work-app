@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class TagList extends StatefulWidget {
   @override
   State<TagList> createState() => _TagListState();
 }
 
 class _TagListState extends State<TagList> {
-  final tagList = <String>[
-    'All',
-    '⚡ Popular',
-    '⭐ Featured',
-    '💰 Best paid',
-    'Example'
-  ];
   var selected = 0;
   @override
   Widget build(BuildContext context) {
+
+    final tagList = <String>[
+    'All',
+    AppLocalizations.of(context)!.tagPopular,
+    AppLocalizations.of(context)!.tagFeatured,
+    AppLocalizations.of(context)!.tagBestPaid,
+  ];
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 25),
       height: 40,
