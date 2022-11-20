@@ -1,4 +1,4 @@
-
+import 'package:examen/constants/colors.dart';
 import 'package:examen/models/job.dart';
 import 'package:examen/widgets/icon_text.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +11,17 @@ class JobDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final widthSize = MediaQuery.of(context).size.width;
+    final hightSize = MediaQuery.of(context).size.height;
+
+    bool isDesktop(BuildContext context) => widthSize >= 600;
+    bool isMobile(BuildContext context) => widthSize < 600;
+
     return Container(
       // card bottom
       padding: EdgeInsets.all(25),
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: isMobile(context) ? Colors.white : const Color(0xFF212121),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),
             topRight: Radius.circular(30),
@@ -54,7 +60,9 @@ class JobDetail extends StatelessWidget {
                         SizedBox(width: 20),
                         Text(
                           job.company,
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: isDesktop(context) ? Colors.white : null),
                         ),
                       ],
                     ),
@@ -67,7 +75,8 @@ class JobDetail extends StatelessWidget {
                             color: job.isMark
                                 ? Theme.of(context).primaryColor
                                 : Colors.black),
-                        Icon(Icons.more_horiz_outlined),
+                        Icon(Icons.more_horiz_outlined,
+                            color: isDesktop(context) ? Colors.white : null),
                       ],
                     ),
                   ],
@@ -75,7 +84,10 @@ class JobDetail extends StatelessWidget {
                 SizedBox(height: 20),
                 Text(
                   job.title,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 26,
+                      color: isDesktop(context) ? Colors.white : null),
                 ),
                 SizedBox(
                   height: 20,
@@ -94,6 +106,7 @@ class JobDetail extends StatelessWidget {
                   AppLocalizations.of(context)!.requirements,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
+                    color: isDesktop(context) ? Colors.white : null,
                   ),
                 ),
                 SizedBox(
@@ -114,7 +127,9 @@ class JobDetail extends StatelessWidget {
                               // Lista
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Colors.black,
+                                color: isDesktop(context)
+                                    ? Colors.white
+                                    : Colors.black,
                               ),
                             ),
                             SizedBox(
@@ -126,7 +141,12 @@ class JobDetail extends StatelessWidget {
                               ),
                               child: Text(
                                 e,
-                                style: TextStyle(wordSpacing: 2.5, height: 1.5),
+                                style: TextStyle(
+                                    wordSpacing: 2.5,
+                                    height: 1.5,
+                                    color: isDesktop(context)
+                                        ? Colors.white
+                                        : null),
                               ),
                             )
                           ],
@@ -144,7 +164,6 @@ class JobDetail extends StatelessWidget {
                         elevation: 0,
                         backgroundColor: Theme.of(context).primaryColor),
                     child: Text(AppLocalizations.of(context)!.applyNow),
-                    
                   ),
                 ),
               ],
