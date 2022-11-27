@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         Locale('en', ''), // English, no country code
         Locale('es', ''), // Spanish, no country code
       ],
-      locale: Locale('es', ''),
+      locale: Locale('en', ''),
       home: HomePage(),
       title: 'Simple Jobs',
       theme: ThemeData(
