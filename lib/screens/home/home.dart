@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.amber[600],
+        backgroundColor: Colors.amber.shade300,
         // quita el shadow
         elevation: 0,
         onPressed: () {},
