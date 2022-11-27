@@ -33,5 +33,10 @@
     "gender": "Género",
     "date": "Fecha de cumpleaños",
     "editProfile": "Editar perfil",
-    "save": "Guardar"
+    "save": "Guardar",
+    "development": "Desarrollo",
+    "business": "Empresa",
+    "data": "Datos",
+    "design": "Diseño",
+    "operation": "Operación"
 }

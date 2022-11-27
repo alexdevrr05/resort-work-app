@@ -1,4 +1,6 @@
 import 'package:examen/screens/search/widgets/search_input.dart';
+import 'package:examen/screens/search/widgets/search_list.dart';
+import 'package:examen/screens/search/widgets/search_option.dart';
 import 'package:flutter/material.dart';
 import 'package:examen/screens/search/widgets/search_top_banner.dart';
 
@@ -29,6 +31,8 @@ class SearchPage extends StatelessWidget {
             children: [
               SearchTopBanner(),
               SearchInput(),
+              SearchOption(),
+              Expanded(child: SearchList()),
             ],
           ),
         ],
