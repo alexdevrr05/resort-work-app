@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "576060610050",
+    "project_id": "simplejobs-55167",
+    "storage_bucket": "simplejobs-55167.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576060610050:android:93ce40941d057bb0f0b91b",
+        "android_client_info": {
+          "package_name": "com.example.examen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "576060610050-6guslacas4tbv4qrt4854ri8r9hbeap5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxaySZ1vvft4fhOW72laoW82NL9HIS1h4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "576060610050-6guslacas4tbv4qrt4854ri8r9hbeap5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "576060610050-4fentol9j5kl81h0dv6ecjc0shtaqqh4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.examen"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
