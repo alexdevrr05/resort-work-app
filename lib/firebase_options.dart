@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '576060610050',
     projectId: 'simplejobs-55167',
     authDomain: 'simplejobs-55167.firebaseapp.com',
+    databaseURL: 'https://simplejobs-55167-default-rtdb.firebaseio.com',
     storageBucket: 'simplejobs-55167.appspot.com',
     measurementId: 'G-NKKB7MZ4YK',
   );
@@ -58,6 +59,7 @@ class DefaultFirebaseOptions {
     appId: '1:576060610050:android:93ce40941d057bb0f0b91b',
     messagingSenderId: '576060610050',
     projectId: 'simplejobs-55167',
+    databaseURL: 'https://simplejobs-55167-default-rtdb.firebaseio.com',
     storageBucket: 'simplejobs-55167.appspot.com',
   );
 
@@ -66,6 +68,7 @@ class DefaultFirebaseOptions {
     appId: '1:576060610050:ios:28daf659ff91fff2f0b91b',
     messagingSenderId: '576060610050',
     projectId: 'simplejobs-55167',
+    databaseURL: 'https://simplejobs-55167-default-rtdb.firebaseio.com',
     storageBucket: 'simplejobs-55167.appspot.com',
     iosClientId: '576060610050-4fentol9j5kl81h0dv6ecjc0shtaqqh4.apps.googleusercontent.com',
     iosBundleId: 'com.example.examen',
@@ -76,6 +79,7 @@ class DefaultFirebaseOptions {
     appId: '1:576060610050:ios:28daf659ff91fff2f0b91b',
     messagingSenderId: '576060610050',
     projectId: 'simplejobs-55167',
+    databaseURL: 'https://simplejobs-55167-default-rtdb.firebaseio.com',
     storageBucket: 'simplejobs-55167.appspot.com',
     iosClientId: '576060610050-4fentol9j5kl81h0dv6ecjc0shtaqqh4.apps.googleusercontent.com',
     iosBundleId: 'com.example.examen',

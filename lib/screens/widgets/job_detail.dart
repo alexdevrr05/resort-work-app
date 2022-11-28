@@ -1,5 +1,7 @@
-import 'package:examen/constants/colors.dart';
+
+
 import 'package:examen/models/job.dart';
+import 'package:examen/models/job_test.dart';
 import 'package:examen/widgets/icon_text.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class JobDetail extends StatelessWidget {
   final Job job;
   JobDetail(this.job);
+  // final jobListTest = JobServices().getJobs();
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +160,10 @@ class JobDetail extends StatelessWidget {
                   height: 45,
                   width: double.maxFinite,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      List resp = await JobServices().getJobs();
+                      print('resp -> $resp');
+                    },
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
