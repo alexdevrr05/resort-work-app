@@ -1,38 +1,37 @@
-import 'package:examen/models/job.dart';
-import 'package:examen/screens/widgets/job_detail.dart';
-import 'package:examen/screens/widgets/job_item.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 
-class SearchList extends StatelessWidget {
+class SearchList extends StatefulWidget {
+  SearchList({Key? key}) : super(key: key);
+  @override
+  State<SearchList> createState() => _searchList();
+}
+
+class _searchList extends State<SearchList> {
+  final databaseRef = FirebaseDatabase.instance.ref('example').child('jobs');
+
   @override
   Widget build(BuildContext context) {
-    final jobList = Job.generateJobs(context);
-
-    return Container(
-      margin: EdgeInsets.only(
-        top: 25,
-      ),
-      child: ListView.separated(
-        padding: EdgeInsets.only(
-          left: 25,
-          right: 25,
-          bottom: 25,
-        ),
-        itemBuilder: (context, index) => GestureDetector(
-          onTap: () {
-            showModalBottomSheet(
-                backgroundColor: Colors.transparent,
-                isScrollControlled: true,
-                context: context,
-                builder: ((context) => JobDetail(jobList[index])));
-          },
-          child: JobItem(jobList[index]),
-        ),
-        separatorBuilder: (context, index) => SizedBox(
-          height: 20,
-        ),
-        itemCount: jobList.length,
-      ),
+    return Scaffold(
+      body: SafeArea(
+          child: FirebaseAnimatedList(
+        query: databaseRef,
+        itemBuilder: (BuildContext context, DataSnapshot snapshot,
+        Animation<double> animation, int index) {
+        var value = Map<String, dynamic>.from(snapshot.value as Map);
+          // print('value $value.name');
+          // return Text('hello');
+          var x = value['name'];
+          print('x -> $x');
+          return ListTile(
+            title: Text(value['company']),
+          );
+        },
+      )),
+      
     );
+    
   }
 }
+
