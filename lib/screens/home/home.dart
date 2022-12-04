@@ -85,7 +85,6 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(
               label: 'Home',
               icon: Icon(
-                // color: Colors.white,
                 Icons.home,
                 size: 20,
               ),
