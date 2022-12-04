@@ -1,6 +1,7 @@
 import 'package:examen/screens/profile/widgets/profile_input.dart';
 import 'package:examen/screens/profile/widgets/profile_top_banner.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfilePage extends StatelessWidget {
