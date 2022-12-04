@@ -12,7 +12,7 @@ class _SearchOptionState extends State<SearchOption> {
     final optionMap = <String, bool>{
       AppLocalizations.of(context)!.development: true,
       AppLocalizations.of(context)!.business: false,
-      AppLocalizations.of(context)!.data: false,
+      AppLocalizations.of(context)!.data: true,
       AppLocalizations.of(context)!.design: false,
       AppLocalizations.of(context)!.operation: false,
     };
@@ -26,6 +26,8 @@ class _SearchOptionState extends State<SearchOption> {
                 onTap: () {
                   setState(() {
                     var res = optionMap[keys[index]] ?? false;
+                    print(optionMap[keys[index]]);
+
                     optionMap[keys[index]] = !res;
                   });
                 },

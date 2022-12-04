@@ -32,6 +32,7 @@ class _searchList extends State<SearchList> {
           var x = value['name'];
           print('x -> $x');
           return Container(
+            margin: EdgeInsets.only(top: 25),
             width: 270,
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
@@ -90,13 +91,13 @@ class _searchList extends State<SearchList> {
                 SizedBox(
                   height: 15,
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     IconText(Icons.location_on_outlined, job.location),
-                //     if (showTime) IconText(Icons.access_time_outlined, job.time)
-                //   ],
-                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconText(Icons.location_on_outlined, value['location']),
+                    IconText(Icons.access_time_outlined, value['time'])
+                  ],
+                ),
               ],
             ),
           );
