@@ -26,7 +26,7 @@ class SearchCard extends StatelessWidget {
         children: [
           Text(
             AppLocalizations.of(context)!.cardTitle,
-            style: TextStyle(color: Colors.white, fontSize: 26),
+            style: TextStyle(color: Colors.white, fontSize: 26, fontFamily: 'Arimo'),
           ),
           SizedBox(height: 10),
           Text(
@@ -34,7 +34,7 @@ class SearchCard extends StatelessWidget {
           AppLocalizations.of(context)!.cardSubtitle,
             // 'You can search quickly for\nthe job you want',
             style: TextStyle(
-                height: 1.6, color: Colors.white, fontWeight: FontWeight.w400),
+                height: 1.6, color: Colors.white, fontWeight: FontWeight.w400, fontFamily: 'MontserratSubrayada'),
           ),
           SizedBox(height: 30),
           GestureDetector(
@@ -57,7 +57,7 @@ class SearchCard extends StatelessWidget {
                   SizedBox(width: 10),
                   Text(
                     AppLocalizations.of(context)!.cardSearch,
-                    style: TextStyle(color: Colors.grey, fontSize: 18),
+                    style: TextStyle(color: Colors.grey, fontSize: 18, fontFamily: 'Arimo'),
                   )
                 ],
               ),

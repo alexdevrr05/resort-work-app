@@ -26,7 +26,9 @@ class HomeAppBar extends StatelessWidget {
                 AppLocalizations.of(context)!.welcome,
                 style: TextStyle(
                     color: isDesktop(context) ? Colors.white : Colors.grey,
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'MontserratSubrayada',
+                    ),
               ),
               SizedBox(
                 height: 10,
@@ -37,6 +39,7 @@ class HomeAppBar extends StatelessWidget {
                   color: isDesktop(context) ? Colors.grey.shade300 : null,
                   fontWeight: FontWeight.bold,
                   fontSize: 28,
+                  fontFamily: 'Arimo'
                 ),
               ),
             ],

@@ -22,6 +22,8 @@ class _TagListState extends State<TagList> {
       AppLocalizations.of(context)!.tagPopular,
       AppLocalizations.of(context)!.tagFeatured,
       AppLocalizations.of(context)!.tagBestPaid,
+      'example',
+      'example2',
     ];
 
     return Container(
