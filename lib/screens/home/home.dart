@@ -1,5 +1,6 @@
 import 'package:examen/constants/colors.dart';
 import 'package:examen/screens/profile/profile.dart';
+import 'package:examen/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:examen/screens/widgets/home_app_bar.dart';
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
     bool isMobile(BuildContext context) => widthSize < 600;
 
     return Scaffold(
+      drawer: Drawer1(),
       body: Stack(
         children: [
           Row(
