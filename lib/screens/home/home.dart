@@ -19,7 +19,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final widthSize = MediaQuery.of(context).size.width;
     final hightSize = MediaQuery.of(context).size.height;
-
     bool isDesktop(BuildContext context) => widthSize >= 600;
     bool isMobile(BuildContext context) => widthSize < 600;
 
