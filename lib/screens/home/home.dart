@@ -9,6 +9,9 @@ import 'package:examen/screens/widgets/search_card.dart';
 import 'package:examen/screens/widgets/tag_list.dart';
 
 class HomePage extends StatefulWidget {
+
+  static String tag = 'home-page';
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
