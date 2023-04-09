@@ -1,7 +1,6 @@
 import 'package:examen/screens/home/home.dart';
 import 'package:flutter/material.dart';
 
-
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
   @override
@@ -50,13 +49,13 @@ class _LoginPageState extends State<LoginPage> {
         // ),
 
         style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(255, 39, 126, 126),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 20)),
+            backgroundColor: Color.fromARGB(255, 39, 126, 126),
+            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20)),
 
         onPressed: () {
           // Navigator.of(context).pushNamed(HomePage.tag);
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => HomePage()));
         },
         // padding: EdgeInsets.all(12),
         // color: Colors.lightBlueAccent,
