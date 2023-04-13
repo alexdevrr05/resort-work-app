@@ -1,9 +1,8 @@
-
-
 import 'package:examen/models/job.dart';
 import 'package:examen/models/job_test.dart';
 import 'package:examen/widgets/icon_text.dart';
 import 'package:flutter/material.dart';
+import 'package:examen/screens/home/apply.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -160,15 +159,10 @@ class JobDetail extends StatelessWidget {
                   height: 45,
                   width: double.maxFinite,
                   child: ElevatedButton(
-                    onPressed: () async {
-                      List resp = await JobServices().getJobs();
-                      print('resp -> $resp');
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ApplyScreen()));
                     },
-                    style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        elevation: 0,
-                        backgroundColor: Theme.of(context).primaryColor),
                     child: Text(AppLocalizations.of(context)!.applyNow),
                   ),
                 ),
