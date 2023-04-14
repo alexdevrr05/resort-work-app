@@ -1,4 +1,6 @@
 import 'package:examen/screens/home/home.dart';
+import 'package:examen/screens/home/register_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -8,7 +10,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _emailController = TextEditingController();
+  final _passwordlController = TextEditingController();
+  final _confirmPasswordlController = TextEditingController();
+
   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordlController.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     final logo = Hero(
       tag: 'hero',
@@ -19,10 +31,9 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    final email = TextFormField(
+    final email = TextField(
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
-      initialValue: 'resort_work@gmail.com',
       decoration: InputDecoration(
         hintText: 'Email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -30,9 +41,9 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    final password = TextFormField(
+    final password = TextField(
+      controller: _passwordlController,
       autofocus: false,
-      initialValue: 'resort123',
       obscureText: true,
       decoration: InputDecoration(
         hintText: 'Password',
@@ -71,6 +82,17 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () {},
     );
 
+    final signInLabel = TextButton(
+      child: Text(
+        'Sign In',
+        style: TextStyle(color: Colors.black54),
+      ),
+      onPressed: () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => RegisterPage()));
+      },
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -85,7 +107,10 @@ class _LoginPageState extends State<LoginPage> {
             password,
             SizedBox(height: 24.0),
             loginButton,
-            forgotLabel
+            SizedBox(height: 24.0),
+            forgotLabel,
+            SizedBox(height: 24.0),
+            signInLabel
           ],
         ),
       ),

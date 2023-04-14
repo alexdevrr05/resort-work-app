@@ -1,5 +1,6 @@
 import 'package:examen/screens/home/home.dart';
 import 'package:examen/screens/home/login.dart';
+import 'package:examen/screens/home/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
       ],
       locale: Locale('en', ''),
       // home: HomePage(),
-      home: LoginPage(),
+      home: RegisterPage(),
       title: 'Simple Jobs',
       theme: ThemeData(
         primaryColor: Color(0xFF43B1B7),
