@@ -27,24 +27,28 @@ class _searchList extends State<SearchList> {
         itemBuilder: (BuildContext context, DataSnapshot snapshot,
             Animation<double> animation, int index) {
           var value = Map<String, dynamic>.from(snapshot.value as Map);
-          // print('value $value.name');
           // return Text('hello');
-          var x = value['name'];
-          print('x -> $x');
+          var x = value['title'];
           return InkWell(
               onTap: () {
                 // Acciones a realizar al presionar el Container
+
                 showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context) {
-                    // Crea el contenido del modal dentro del contexto del Container
                     return Container(
-                      height: 200,
-                      width: double.infinity,
-                      color: Colors.white,
-                      child: Center(
-                        child: Text('Este es el contenido del modal'),
-                      ),
+                      child: ListView.builder(
+                          itemCount: value['req'].length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final texto = value['req'][index];
+                            return ListTile(
+                              title: Text(texto),
+                              onTap: () {
+                                // Hacer algo cuando se presiona el elemento de la lista
+                                Navigator.of(context).pop();
+                              },
+                            );
+                          }),
                     );
                   },
                 );
