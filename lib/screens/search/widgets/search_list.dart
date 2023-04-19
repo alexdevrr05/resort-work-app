@@ -1,18 +1,22 @@
 import 'package:examen/constants/colors.dart';
-import 'package:examen/screens/widgets/job_item.dart';
 import 'package:examen/widgets/icon_text.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../home/apply.dart';
 
 class SearchList extends StatefulWidget {
   SearchList({Key? key}) : super(key: key);
+
   @override
   State<SearchList> createState() => _searchList();
 }
 
 class _searchList extends State<SearchList> {
   final databaseRef = FirebaseDatabase.instance.ref('jobs');
+
   @override
   Widget build(BuildContext context) {
     final widthSize = MediaQuery.of(context).size.width;
@@ -37,18 +41,37 @@ class _searchList extends State<SearchList> {
                   context: context,
                   builder: (BuildContext context) {
                     return Container(
-                      child: ListView.builder(
-                          itemCount: value['req'].length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final texto = value['req'][index];
-                            return ListTile(
-                              title: Text(texto),
-                              onTap: () {
-                                // Hacer algo cuando se presiona el elemento de la lista
-                                Navigator.of(context).pop();
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: value['req'].length,
+                              itemBuilder: (BuildContext context, int index) {
+                                var x2 = value['title'];
+                                print('$x2');
+                                final texto = value['req'][index];
+                                return ListTile(
+                                  title: Text(texto),
+                                  onTap: () {
+                                    // Hacer algo cuando se presiona el elemento de la lista
+                                    Navigator.of(context).pop();
+                                  },
+                                );
                               },
-                            );
-                          }),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => ApplyScreen(
+                                        vacancy: value,
+                                      )));
+                            },
+                            child: Text(AppLocalizations.of(context)!.applyNow),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 );
