@@ -2,9 +2,12 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ApplyScreen extends StatefulWidget {
+  final Map<String, dynamic> vacancy;
+
+  ApplyScreen({required this.vacancy});
+
   @override
   _ApplyScreenState createState() => _ApplyScreenState();
 }
@@ -31,16 +34,21 @@ class _ApplyScreenState extends State<ApplyScreen> {
   }
 
   Future<void> _saveData() async {
+    // Validate the form before saving the data
     if (_formKey.currentState!.validate()) {
       try {
-        final databaseRef = FirebaseDatabase.instance.ref();
-        await databaseRef.child("documentos").push().set({
+        // Reference to the Firebase database
+        final databaseRef =
+            FirebaseDatabase.instance.ref('documentos').push().set({
           "name": _name,
           "email": _email,
           "phone": _phone,
           "address": _address,
+          "vacantePostulado":
+              widget.vacancy, // Agrega la información de la vacante aquí
           "cv_url": _selectedFile?.path
         });
+
         print("Data saved successfully!");
       } catch (e) {
         print("Failed to save data: $e");
@@ -52,7 +60,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Personal Information'),
+        title: Text('Personal Information - ${widget.vacancy["title"]}'),
       ),
       body: Form(
         key: _formKey,

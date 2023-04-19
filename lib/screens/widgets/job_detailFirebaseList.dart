@@ -2,19 +2,17 @@ import 'package:examen/models/job.dart';
 import 'package:examen/models/job_test.dart';
 import 'package:examen/widgets/icon_text.dart';
 import 'package:flutter/material.dart';
-import 'package:examen/screens/home/apply.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class JobDetail extends StatelessWidget {
+class JobDetailFirebaseList extends StatelessWidget {
   final Job job;
-  JobDetail(this.job);
+  JobDetailFirebaseList(this.job);
   // final jobListTest = JobServices().getJobs();
 
   @override
   Widget build(BuildContext context) {
     final widthSize = MediaQuery.of(context).size.width;
-    final hightSize = MediaQuery.of(context).size.height;
 
     bool isDesktop(BuildContext context) => widthSize >= 600;
     bool isMobile(BuildContext context) => widthSize < 600;
@@ -158,6 +156,18 @@ class JobDetail extends StatelessWidget {
                   margin: EdgeInsets.symmetric(vertical: 25),
                   height: 45,
                   width: double.maxFinite,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      List resp = await JobServices().getJobs();
+                      print('resp -> $resp');
+                    },
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        elevation: 0,
+                        backgroundColor: Theme.of(context).primaryColor),
+                    child: Text(AppLocalizations.of(context)!.applyNow),
+                  ),
                 ),
               ],
             ),
