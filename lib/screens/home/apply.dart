@@ -56,8 +56,20 @@ class _ApplyScreenState extends State<ApplyScreen> {
     }
   }
 
-  void _cancel() {
-    Navigator.of(context).pop();
+  void _cancel() async {
+    final ref = FirebaseDatabase.instance.ref().child('documentos');
+    Query query = ref.orderByChild('email').equalTo(_email);
+    query.once().then((event) {
+      // Aquí puedes acceder a los datos que coinciden con la consulta
+      final values = Map<String, dynamic>.from(
+          event.snapshot.value! as Map<Object?, Object?>);
+      values.forEach((key, value) {
+        ref.child(key).remove();
+      });
+      print("Usuarios eliminados correctamente");
+    }).catchError((error) {
+      print("Error al eliminar los usuarios: $error");
+    });
   }
 
   @override
@@ -129,6 +141,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   });
                 },
               ),
+              SizedBox(height: 6.0),
               Row(children: [
                 ElevatedButton(
                   onPressed: _saveData,
@@ -137,7 +150,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                 SizedBox(width: 8.0),
                 ElevatedButton(
                   onPressed: _cancel,
-                  child: Text('Cancel'),
+                  child: Text('Cancel vacancy'),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.grey,
                   ),
