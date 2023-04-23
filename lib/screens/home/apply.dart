@@ -56,6 +56,10 @@ class _ApplyScreenState extends State<ApplyScreen> {
     }
   }
 
+  void _cancel() {
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,12 +129,20 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   });
                 },
               ),
-              SizedBox(height: 16.0),
-              SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: _saveData,
-                child: Text('Save'),
-              )
+              Row(children: [
+                ElevatedButton(
+                  onPressed: _saveData,
+                  child: Text('Save'),
+                ),
+                SizedBox(width: 8.0),
+                ElevatedButton(
+                  onPressed: _cancel,
+                  child: Text('Cancel'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey,
+                  ),
+                )
+              ])
             ],
           ),
         ),
