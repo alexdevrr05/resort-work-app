@@ -12,7 +12,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordlController = TextEditingController();
-  final _confirmPasswordlController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -22,6 +22,23 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget build(BuildContext context) {
+    void _signIn() async {
+      try {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordlController.text,
+        );
+        // print('User signed in: ${userCredential.user!.uid}');
+        print('User signed in: ${userCredential.user}');
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                HomePage(userCredential: userCredential.user!.email)));
+      } on FirebaseAuthException catch (e) {
+        print('Failed to sign in user: $e');
+      }
+    }
+
     final logo = Hero(
       tag: 'hero',
       child: CircleAvatar(
@@ -32,8 +49,9 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final email = TextField(
+      controller: _emailController,
       keyboardType: TextInputType.emailAddress,
-      autofocus: false,
+      autofocus: true,
       decoration: InputDecoration(
         hintText: 'Email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -64,13 +82,12 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20)),
 
         onPressed: () {
-          // Navigator.of(context).pushNamed(HomePage.tag);
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => HomePage()));
+          _signIn();
+          // Navigator.of(context)
+          //     .push(MaterialPageRoute(builder: (context) => HomePage()));
         },
-        // padding: EdgeInsets.all(12),
-        // color: Colors.lightBlueAccent,
-        child: Text('Log In', style: TextStyle(color: Colors.white)),
+
+        child: Text('LogIn', style: TextStyle(color: Colors.white)),
       ),
     );
 

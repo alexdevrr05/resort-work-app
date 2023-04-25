@@ -31,10 +31,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future signUp() async {
     // authenticate user
-    if (!passwordConfirmed()) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordlController.text.trim());
+    if (passwordConfirmed()) {
+      final example = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: _emailController.text.trim(),
+              password: _passwordlController.text.trim());
+      print('User signed in: $example');
     }
 
     // add user details
