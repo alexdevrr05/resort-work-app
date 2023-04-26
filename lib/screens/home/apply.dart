@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -64,7 +65,11 @@ class _ApplyScreenState extends State<ApplyScreen> {
       final values = Map<String, dynamic>.from(
           event.snapshot.value! as Map<Object?, Object?>);
       values.forEach((key, value) {
-        ref.child(key).remove();
+        value = jsonDecode(jsonEncode(value));
+        if (value['vacantePostulado']['company'] == widget.vacancy['company'] &&
+            value['vacantePostulado']['title'] == widget.vacancy['title']) {
+          ref.child(key).remove();
+        }
       });
       print("Usuarios eliminados correctamente");
     }).catchError((error) {
