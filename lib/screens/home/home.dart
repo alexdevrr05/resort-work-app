@@ -7,6 +7,8 @@ import 'package:examen/screens/widgets/home_app_bar.dart';
 import 'package:examen/screens/widgets/job_list.dart';
 import 'package:examen/screens/widgets/search_card.dart';
 import 'package:examen/screens/widgets/tag_list.dart';
+import 'package:examen/screens/home/vacante_page.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -72,8 +74,10 @@ class _HomePageState extends State<HomePage> {
         child: BottomNavigationBar(
           onTap: (value) {
             if (value == 4)
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => ProfilePage()));
+              /*Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => ProfilePage()));*/
+                  Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => PublicarVacanteForm()));
           },
           showSelectedLabels: false,
           showUnselectedLabels: false,
@@ -104,10 +108,18 @@ class _HomePageState extends State<HomePage> {
                 size: 20,
               ),
             ),
-            BottomNavigationBarItem(
+            /*BottomNavigationBarItem(
               label: 'Person',
               icon: Icon(
                 Icons.person_outline,
+                size: 20,
+              ),
+            ),*/
+
+             BottomNavigationBarItem( // publicar vacante
+              label: 'Vacant',
+              icon: Icon(
+                Icons.create_new_folder_rounded,
                 size: 20,
               ),
             ),
