@@ -73,9 +73,9 @@ class _HomePageState extends State<HomePage> {
             highlightColor: Colors.transparent),
         child: BottomNavigationBar(
           onTap: (value) {
-            if (value == 4)
-              /*Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => ProfilePage()));*/
+            if (value == 5)
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => ProfilePage()));
                   Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => PublicarVacanteForm()));
           },
@@ -108,13 +108,13 @@ class _HomePageState extends State<HomePage> {
                 size: 20,
               ),
             ),
-            /*BottomNavigationBarItem(
+            BottomNavigationBarItem(
               label: 'Person',
               icon: Icon(
                 Icons.person_outline,
                 size: 20,
               ),
-            ),*/
+            ),
 
              BottomNavigationBarItem( // publicar vacante
               label: 'Vacant',
