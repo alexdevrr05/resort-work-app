@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -18,18 +19,20 @@ class _ApplyScreenState extends State<ApplyScreen> {
   String _email = '';
   String _phone = '';
   String _address = '';
-  File? _selectedFile;
 
-  void _openFileExplorer() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['pdf'],
-    );
+  final FirebaseStorage _storage = FirebaseStorage.instance;
+  Future<void> uploadFile(PlatformFile file) async {
+    try {
+      // Genera una referencia al archivo en Firebase Storage
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      Reference storageRef = _storage.ref('archivos/$fileName');
 
-    if (result != null) {
-      setState(() {
-        _selectedFile = File(result.files.single.path!);
-      });
+      // Sube el archivo a Firebase Storage
+      await storageRef.putData(file.bytes!);
+
+      print('Archivo subido exitosamente');
+    } catch (e) {
+      print('Error al subir el archivo: $e');
     }
   }
 
@@ -39,14 +42,14 @@ class _ApplyScreenState extends State<ApplyScreen> {
       try {
         // Reference to the Firebase database
         final databaseRef =
-            FirebaseDatabase.instance.ref('documentos').push().set({
+            FirebaseDatabase.instance.ref().child('documentos').push();
+        await databaseRef.set({
           "name": _name,
           "email": _email,
           "phone": _phone,
           "address": _address,
           "vacantePostulado":
               widget.vacancy, // Agrega la información de la vacante aquí
-          "cv_url": _selectedFile?.path
         });
 
         print("Data saved successfully!");
@@ -127,6 +130,18 @@ class _ApplyScreenState extends State<ApplyScreen> {
               ),
               SizedBox(height: 16.0),
               SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () async {
+// Abre el explorador de archivos para seleccionar un documento
+                  FilePickerResult? result =
+                      await FilePicker.platform.pickFiles();
+                  if (result != null) {
+                    PlatformFile file = result.files.single;
+                    await uploadFile(file);
+                  }
+                },
+                child: Text('Seleccionar archivo'),
+              ),
               ElevatedButton(
                 onPressed: _saveData,
                 child: Text('Save'),
