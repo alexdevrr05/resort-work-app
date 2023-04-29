@@ -1,7 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:examen/screens/home/home.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 
 class PublicarVacanteForm extends StatefulWidget {
@@ -19,24 +21,28 @@ class _PublicarVacanteFormState extends State<PublicarVacanteForm> {
   late String _descripcion;
   late int time;
 
-  CollectionReference vacantes =
-      FirebaseFirestore.instance.collection('jobs');
+ Future<void> _saveData() async {
+    // Validate the form before saving the data
+    if (_formKey.currentState!.validate()) {
+      try {
+        // Reference to the Firebase database
+        final databaseRef =
+            FirebaseDatabase.instance.ref('jobs').push().set({
+        "company": company,
+        "title": title,
+        "location": location,
+        "req": _requisitos,
+        "descripcion": _descripcion,
+        "time": time,
+      });
+        
 
-  Future<void> addVacante() {
-    return vacantes
-        .add({
-          'company': company,
-          'title': title,
-          'location': location,
-          'req': _requisitos,
-          'descripcion': _descripcion,
-          'time': time
-        })
-        .then((value) => print('Vacante agregada exitosamente'))
-        .catchError((error) => print('Error al agregar la vacante: $error'));
+        print("Data saved successfully!");
+      } catch (e) {
+        print("Failed to save data: $e");
+      }
+    }
   }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,7 +143,8 @@ class _PublicarVacanteFormState extends State<PublicarVacanteForm> {
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Localizacion',
-                  prefixIcon: Icon(FontAwesomeIcons.file
+                  prefixIcon: Icon(FontAwesomeIcons.locationPinLock,
+                   color: Color.fromARGB(255, 126, 17, 20),
                   
                   ),
                 ),
@@ -159,7 +166,7 @@ class _PublicarVacanteFormState extends State<PublicarVacanteForm> {
                   labelText: 'Tiempo',
                   
                   prefixIcon: Icon(FontAwesomeIcons.clock,
-                  color: Colors.blueGrey,
+                  color: Color.fromARGB(255, 28, 76, 99),
                   
                   ),
                 ),
@@ -205,9 +212,13 @@ class _PublicarVacanteFormState extends State<PublicarVacanteForm> {
               }
             },
             
-            child: Text('Publicar vacante'), //el boton de publicar
+            child: Text('Publicar vacante',
+            style: TextStyle(fontFamily: 'MontserratSubrayada'),
+            ),
+            
+             //el boton de publicar
             style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius : BorderRadius.circular(10.0)),
+              shape: RoundedRectangleBorder(borderRadius : BorderRadius.circular(15.0)),
               backgroundColor: Color.fromARGB(255, 12, 33, 50), // Color de fondo del botón
               textStyle:TextStyle(color: Colors.white30, fontWeight: FontWeight.bold) // Color del texto del botón
             ),
