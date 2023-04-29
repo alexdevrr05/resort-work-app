@@ -21,14 +21,20 @@ class _ApplyScreenState extends State<ApplyScreen> {
   String _address = '';
 
   final FirebaseStorage _storage = FirebaseStorage.instance;
-  Future<void> uploadFile(PlatformFile file) async {
+  Future<void> uploadFile(File file) async {
     try {
+      print('File path: ${file.path}'); // Imprimir la ruta del archivo
+
       // Genera una referencia al archivo en Firebase Storage
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      print('File name: $fileName'); // Imprimir el nombre del archivo
+
       Reference storageRef = _storage.ref('archivos/$fileName');
+      print(
+          'Storage ref: $storageRef'); // Imprimir la referencia de almacenamiento
 
       // Sube el archivo a Firebase Storage
-      await storageRef.putData(file.bytes!);
+      await storageRef.putFile(file);
 
       print('Archivo subido exitosamente');
     } catch (e) {
@@ -132,12 +138,15 @@ class _ApplyScreenState extends State<ApplyScreen> {
               SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () async {
-// Abre el explorador de archivos para seleccionar un documento
+                  // Abre el explorador de archivos para seleccionar un documento
                   FilePickerResult? result =
                       await FilePicker.platform.pickFiles();
-                  if (result != null) {
-                    PlatformFile file = result.files.single;
+
+                  if (result != null && result.files.single.path != null) {
+                    File file = File(result.files.single.path!);
                     await uploadFile(file);
+                  } else {
+                    print('Error al obtener la ruta del archivo');
                   }
                 },
                 child: Text('Seleccionar archivo'),
