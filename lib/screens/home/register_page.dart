@@ -32,11 +32,25 @@ class _RegisterPageState extends State<RegisterPage> {
   Future signUp() async {
     // authenticate user
     if (passwordConfirmed()) {
-      final example = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: _emailController.text.trim(),
-              password: _passwordlController.text.trim());
-      print('User signed in: $example');
+      try {
+        final userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: _emailController.text.trim(),
+                password: _passwordlController.text.trim());
+        print('User signed in: $userCredential');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Te has registrado con éxito!')),
+        );
+
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                HomePage(userCredential: userCredential.user!.email)));
+      } on FirebaseAuthException catch (e) {
+        print('Algo: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Todos los campos son obligatorios')),
+        );
+      }
     }
 
     // add user details
