@@ -40,9 +40,9 @@ class MyApp extends StatelessWidget {
       locale: Locale('en', ''),
       // home: HomePage(),
       home: RegisterPage(),
-      title: 'Simple Jobs',
+      title: 'Resort Work',
       theme: ThemeData(
-        primaryColor: Color(0xFF43B1B7),
+        primaryColor: Color.fromARGB(255, 39, 126, 126),
       ),
       debugShowCheckedModeBanner: false,
     );

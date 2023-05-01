@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:examen/constants/colors.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -82,6 +83,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Personal Information - ${widget.vacancy["title"]}'),
+        backgroundColor: Color.fromARGB(255, 39, 126, 126),
       ),
       body: Form(
         key: _formKey,
@@ -151,6 +153,9 @@ class _ApplyScreenState extends State<ApplyScreen> {
                 ElevatedButton(
                   onPressed: _saveData,
                   child: Text('Save'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 39, 126, 126),
+                  ),
                 ),
                 SizedBox(width: 8.0),
                 ElevatedButton(

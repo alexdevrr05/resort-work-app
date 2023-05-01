@@ -1,6 +1,5 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class Job {
   String company;
   String logoUrl;
@@ -41,7 +40,7 @@ class Job {
         false,
         AppLocalizations.of(context)!.jobTime,
         'Pto. Vallarta Jalisco',
-         AppLocalizations.of(context)!.jobDevFullStack,
+        AppLocalizations.of(context)!.jobDevFullStack,
         [
           AppLocalizations.of(context)!.reqFullStack1,
           AppLocalizations.of(context)!.reqFullStack2,
