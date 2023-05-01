@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeAppBar extends StatelessWidget {
+  dynamic userCredential;
+  HomeAppBar({this.userCredential});
+
   @override
   Widget build(BuildContext context) {
     final widthSize = MediaQuery.of(context).size.width;
@@ -25,22 +28,21 @@ class HomeAppBar extends StatelessWidget {
               Text(
                 AppLocalizations.of(context)!.welcome,
                 style: TextStyle(
-                    color: isDesktop(context) ? Colors.white : Colors.grey,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'MontserratSubrayada',
-                    ),
+                  color: isDesktop(context) ? Colors.white : Colors.grey,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'MontserratSubrayada',
+                ),
               ),
               SizedBox(
                 height: 10,
               ),
               Text(
-                'Alex Ramírez',
+                '$userCredential',
                 style: TextStyle(
-                  color: isDesktop(context) ? Colors.grey.shade300 : null,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28,
-                  fontFamily: 'Arimo'
-                ),
+                    color: isDesktop(context) ? Colors.grey.shade300 : null,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 28,
+                    fontFamily: 'Arimo'),
               ),
             ],
           ),

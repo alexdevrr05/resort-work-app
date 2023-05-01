@@ -12,7 +12,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordlController = TextEditingController();
-  final _confirmPasswordlController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  String error = '';
+  String welcome = '';
 
   @override
   void dispose() {
@@ -22,6 +24,36 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget build(BuildContext context) {
+    void _signIn() async {
+      try {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordlController.text,
+        );
+        print('User signed in: ${userCredential.user}');
+
+        setState(() {
+          welcome = 'Bienvenido';
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Welcome ${userCredential.user!.email}')),
+        );
+
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                HomePage(userCredential: userCredential.user!.email)));
+      } on FirebaseAuthException catch (e) {
+        print('Failed to sign in user: $e');
+        setState(() {
+          error = 'Credenciales inválidas';
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error)),
+        );
+      }
+    }
+
     final logo = Hero(
       tag: 'hero',
       child: CircleAvatar(
@@ -32,8 +64,9 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final email = TextField(
+      controller: _emailController,
       keyboardType: TextInputType.emailAddress,
-      autofocus: false,
+      autofocus: true,
       decoration: InputDecoration(
         hintText: 'Email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -55,22 +88,13 @@ class _LoginPageState extends State<LoginPage> {
     final loginButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: ElevatedButton(
-        // shape: RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.circular(24),
-        // ),
-
         style: ElevatedButton.styleFrom(
             backgroundColor: Color.fromARGB(255, 39, 126, 126),
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20)),
-
         onPressed: () {
-          // Navigator.of(context).pushNamed(HomePage.tag);
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => HomePage()));
+          _signIn();
         },
-        // padding: EdgeInsets.all(12),
-        // color: Colors.lightBlueAccent,
-        child: Text('Log In', style: TextStyle(color: Colors.white)),
+        child: Text('LogIn', style: TextStyle(color: Colors.white)),
       ),
     );
 
@@ -93,6 +117,10 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
+    // final example = ScaffoldMessenger.of(context).showSnackBar(
+    //   SnackBar(content: Text(error)),
+    // );
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -110,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 24.0),
             forgotLabel,
             SizedBox(height: 24.0),
-            signInLabel
+            signInLabel,
           ],
         ),
       ),

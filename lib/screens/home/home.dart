@@ -9,15 +9,20 @@ import 'package:examen/screens/widgets/search_card.dart';
 import 'package:examen/screens/widgets/tag_list.dart';
 
 class HomePage extends StatefulWidget {
-
   static String tag = 'home-page';
+  final dynamic userCredential;
+
+  HomePage({required this.userCredential});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() =>
+      _HomePageState(userCredential: userCredential);
 }
 
-
 class _HomePageState extends State<HomePage> {
+  final dynamic userCredential;
+  _HomePageState({required this.userCredential});
+
   @override
   Widget build(BuildContext context) {
     final widthSize = MediaQuery.of(context).size.width;
@@ -52,7 +57,12 @@ class _HomePageState extends State<HomePage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             // HomeAppBar: welcome, notifiction and avatar image
-            children: [HomeAppBar(), SearchCard(), TagList(), JobList()],
+            children: [
+              HomeAppBar(userCredential: userCredential),
+              SearchCard(),
+              TagList(),
+              JobList()
+            ],
           ),
         ],
       ),

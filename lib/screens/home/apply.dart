@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:examen/constants/colors.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -20,18 +21,26 @@ class _ApplyScreenState extends State<ApplyScreen> {
   String _email = '';
   String _phone = '';
   String _address = '';
-  File? _selectedFile;
 
-  void _openFileExplorer() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['pdf'],
-    );
+  final FirebaseStorage _storage = FirebaseStorage.instance;
+  Future<void> uploadFile(File file) async {
+    try {
+      print('File path: ${file.path}'); // Imprimir la ruta del archivo
 
-    if (result != null) {
-      setState(() {
-        _selectedFile = File(result.files.single.path!);
-      });
+      // Genera una referencia al archivo en Firebase Storage
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      print('File name: $fileName'); // Imprimir el nombre del archivo
+
+      Reference storageRef = _storage.ref('archivos/$fileName');
+      print(
+          'Storage ref: $storageRef'); // Imprimir la referencia de almacenamiento
+
+      // Sube el archivo a Firebase Storage
+      await storageRef.putFile(file);
+
+      print('Archivo subido exitosamente');
+    } catch (e) {
+      print('Error al subir el archivo: $e');
     }
   }
 
@@ -41,14 +50,14 @@ class _ApplyScreenState extends State<ApplyScreen> {
       try {
         // Reference to the Firebase database
         final databaseRef =
-            FirebaseDatabase.instance.ref('documentos').push().set({
+            FirebaseDatabase.instance.ref().child('documentos').push();
+        await databaseRef.set({
           "name": _name,
           "email": _email,
           "phone": _phone,
           "address": _address,
           "vacantePostulado":
               widget.vacancy, // Agrega la información de la vacante aquí
-          "cv_url": _selectedFile?.path
         });
 
         print("Data saved successfully!");
