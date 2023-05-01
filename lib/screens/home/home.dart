@@ -9,7 +9,6 @@ import 'package:examen/screens/widgets/search_card.dart';
 import 'package:examen/screens/widgets/tag_list.dart';
 import 'package:examen/screens/home/vacante_page.dart';
 
-
 class HomePage extends StatefulWidget {
   static String tag = 'home-page';
   final dynamic userCredential;
@@ -31,7 +30,6 @@ class _HomePageState extends State<HomePage> {
     final hightSize = MediaQuery.of(context).size.height;
     bool isDesktop(BuildContext context) => widthSize >= 600;
     bool isMobile(BuildContext context) => widthSize < 600;
-
     return Scaffold(
       drawer: Drawer1(),
       body: Stack(
@@ -86,11 +84,13 @@ class _HomePageState extends State<HomePage> {
             highlightColor: Colors.transparent),
         child: BottomNavigationBar(
           onTap: (value) {
-            if (value == 4)
-             /* Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => ProfilePage()));*/
-                  Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => PublicarVacanteForm()));
+            if (value == 4) if (userCredential == "example@gmail.com") {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => PublicarVacanteForm()));
+            } else {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => ProfilePage()));
+            }
           },
           showSelectedLabels: false,
           showUnselectedLabels: false,
@@ -121,18 +121,13 @@ class _HomePageState extends State<HomePage> {
                 size: 20,
               ),
             ),
-            /*BottomNavigationBarItem(
-              label: 'Person',
+            BottomNavigationBarItem(
+              label:
+                  userCredential == "example@gmail.com" ? 'Vacant' : 'Person',
               icon: Icon(
-                Icons.person_outline,
-                size: 20,
-              ),
-            ),*/
-
-             BottomNavigationBarItem( // publicar vacante
-              label: 'Vacant',
-              icon: Icon(
-                Icons.create_new_folder_rounded,
+                userCredential == "example@gmail.com"
+                    ? Icons.create_new_folder_rounded
+                    : Icons.person_outline,
                 size: 20,
               ),
             ),
