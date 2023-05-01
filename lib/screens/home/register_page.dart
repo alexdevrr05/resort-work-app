@@ -17,6 +17,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _ageController = TextEditingController();
   final _passwordlController = TextEditingController();
   final _confirmPasswordlController = TextEditingController();
+  bool _showError = false;
 
   @override
   void dispose() {
@@ -29,9 +30,44 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
+  bool isValidEmail(String email) {
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
   Future signUp() async {
+    if (_firstNameController.text.isEmpty ||
+        _lastNameController.text.isEmpty ||
+        _emailController.text.isEmpty ||
+        _ageController.text.isEmpty ||
+        _passwordlController.text.isEmpty ||
+        _confirmPasswordlController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Todos los campos son obligatorios')),
+      );
+      return;
+    }
+
+    if (!(num.tryParse(_ageController.text) != null)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('La edad tiene que ser un número!')),
+      );
+      return;
+    }
+
+    final isValid = isValidEmail(_emailController.text);
+
+    if (!isValid) {
+      print('email not valid');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Ingrese un correo electrónico válido'),
+        ),
+      );
+    }
+
     // authenticate user
-    if (passwordConfirmed()) {
+    if (passwordConfirmed() && isValid) {
       try {
         final userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
@@ -48,7 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
       } on FirebaseAuthException catch (e) {
         print('Algo: $e');
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Todos los campos son obligatorios')),
+          SnackBar(content: Text('$e')),
         );
       }
     }
@@ -77,6 +113,9 @@ class _RegisterPageState extends State<RegisterPage> {
         _confirmPasswordlController.text.trim()) {
       return true;
     } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Las contraseñas no coinciden')),
+      );
       return false;
     }
   }
