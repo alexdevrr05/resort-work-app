@@ -16,14 +16,24 @@ class _PublicarVacanteFormState extends State<PublicarVacanteForm> {
    String company ="";
    String title  ="";
    String location ="";
-   String _requisitos = "";
+   String logoUrl ="";
+   List<String> _requisitos = ['0','1','2','3'];
    String time = "";
 
  Future<void> _saveData() async {
     // Validate the form before saving the data
     if (_formKey.currentState!.validate()) {
       try {
-            
+            // Validate the requisitos before saving the data
+      if (!validarRequisitos(_requisitos)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('El arreglo de requisitos debe tener al menos 4 elementos'),
+            duration: Duration(seconds: 3),
+          ),
+        );
+        return;
+      }
         // Reference to the Firebase database
         final databaseRef =
             FirebaseDatabase.instance.ref('jobs').push().set({
@@ -31,6 +41,7 @@ class _PublicarVacanteFormState extends State<PublicarVacanteForm> {
         "company": company,
         "title": title,
         "location": location,
+        "logoUrl" :logoUrl,
         "req": _requisitos,
         "time": time,
       });
@@ -54,6 +65,12 @@ class _PublicarVacanteFormState extends State<PublicarVacanteForm> {
       }
     }
   }
+  bool validarRequisitos(List<String> requisitos) {
+  if (requisitos.length < 4) {
+    return false;
+  }
+  return true;
+}
      
   @override
   Widget build(BuildContext context) {
@@ -131,10 +148,11 @@ class _PublicarVacanteFormState extends State<PublicarVacanteForm> {
                   
                 },
               ),
-              SizedBox(height: 25.0),
+               SizedBox(height: 25.0),
+              for (int i = 0; i < 4; i++) 
               TextFormField(
-                decoration: InputDecoration(//requisito 
-                  labelText: 'Requisitos',
+                decoration: InputDecoration(//requisito 0
+                  labelText: 'Requisitos ',
                   prefixIcon: Icon(FontAwesomeIcons.file,
                   color: Color.fromARGB(255, 108, 12, 12),
                   ),
@@ -146,9 +164,17 @@ class _PublicarVacanteFormState extends State<PublicarVacanteForm> {
                   return null;
                 },
               onChanged: (value) {
-                _requisitos = value;
+               if (_requisitos.length < 4) {
+                _requisitos.add(value);
+                } else {
+                  _requisitos[i] = value;
+      }
                 },
               ),
+               
+
+             
+
              
              
               SizedBox(height: 25.0),
