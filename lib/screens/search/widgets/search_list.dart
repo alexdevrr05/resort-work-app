@@ -102,7 +102,12 @@ class _searchList extends State<SearchList> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.grey.withOpacity(0.1),
                               ),
-                              child: Image.asset(value['logoUrl']),
+
+                              // child: Image.asset(value['logoUrl']),
+                              child:
+                                  value['logoUrl'].substring(0, 6) == "assets"
+                                      ? Image.asset(value['logoUrl'])
+                                      : Image.network(value['logoUrl']),
                             ),
                             SizedBox(width: 10),
                             Text(

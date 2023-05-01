@@ -41,9 +41,10 @@ class _PublicarVacanteFormState extends State<PublicarVacanteForm> {
         "company": company,
         "title": title,
         "location": location,
-        "logoUrl" :logoUrl,
+        "logoUrl" : "https://cdn-icons-png.flaticon.com/512/9167/9167056.png",
         "req": _requisitos,
         "time": time,
+        "isMark": false,
       });
         
        print("Data saved successfully!");
