@@ -81,21 +81,23 @@ class _RegisterPageState extends State<RegisterPage> {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
                 HomePage(userCredential: userCredential.user!.email)));
+
+        // add user details
+        addUserDetails(
+          _firstNameController.text.trim(),
+          _lastNameController.text.trim(),
+          _emailController.text.trim(),
+          int.parse(_ageController.text.trim()),
+        );
       } on FirebaseAuthException catch (e) {
         print('Algo: $e');
+        String? mensajeDeError = e.message;
+
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('$e')),
+          SnackBar(content: Text('$mensajeDeError')),
         );
       }
     }
-
-    // add user details
-    addUserDetails(
-      _firstNameController.text.trim(),
-      _lastNameController.text.trim(),
-      _emailController.text.trim(),
-      int.parse(_ageController.text.trim()),
-    );
   }
 
   Future addUserDetails(
