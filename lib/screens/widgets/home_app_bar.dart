@@ -77,7 +77,7 @@ class HomeAppBar extends StatelessWidget {
               ClipOval(
                   child: Image.network(
                 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png',
-                width: 40,
+                width: 30,
               ))
             ],
           ),
