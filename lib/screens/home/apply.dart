@@ -160,6 +160,23 @@ class _ApplyScreenState extends State<ApplyScreen> {
               SizedBox(height: 6.0),
               Row(children: [
                 ElevatedButton(
+                  onPressed: () async {
+                    // Abre el explorador de archivos para seleccionar un documento
+                    FilePickerResult? result =
+                        await FilePicker.platform.pickFiles();
+                    if (result != null && result.files.single.path != null) {
+                      File file = File(result.files.single.path!);
+                      await uploadFile(file);
+                    } else {
+                      print('Error al obtener la ruta del archivo');
+                    }
+                  },
+                  child: const Text('Select File'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 39, 126, 126),
+                  ),
+                ),
+                ElevatedButton(
                   onPressed: _saveData,
                   child: Text('Save'),
                   style: ElevatedButton.styleFrom(
