@@ -12,8 +12,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordlController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  String error = '';
   String welcome = '';
 
   @override
@@ -26,6 +24,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     void _signIn() async {
       try {
+        if (_emailController.text.isEmpty ||
+            _passwordlController.text.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Todos los campos son obligatorios')),
+          );
+          return;
+        }
+
         UserCredential userCredential =
             await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text,
@@ -44,12 +50,9 @@ class _LoginPageState extends State<LoginPage> {
             builder: (context) =>
                 HomePage(userCredential: userCredential.user!.email)));
       } on FirebaseAuthException catch (e) {
-        print('Failed to sign in user: $e');
-        setState(() {
-          error = 'Credenciales inválidas';
-        });
+        String? mensajeDeError = e.message;
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(error)),
+          SnackBar(content: Text('$mensajeDeError')),
         );
       }
     }
