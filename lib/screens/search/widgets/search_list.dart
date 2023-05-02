@@ -202,6 +202,19 @@ class _searchList extends State<SearchList> {
                                   height: 45,
                                   width: double.maxFinite,
                                 ),
+                                ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                              builder: (context) => ApplyScreen(
+                                                    vacancy: value,
+                                                  )));
+                                    },
+                                    child: Text(
+                                        AppLocalizations.of(context)!.applyNow),
+                                    style: ElevatedButton.styleFrom(
+                                        primary:
+                                            Color.fromARGB(255, 39, 126, 126))),
                               ],
                             ),
                           ],
