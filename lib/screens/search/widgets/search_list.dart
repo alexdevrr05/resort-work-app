@@ -41,38 +41,171 @@ class _searchList extends State<SearchList> {
                   context: context,
                   builder: (BuildContext context) {
                     return Container(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: value['req'].length,
-                              itemBuilder: (BuildContext context, int index) {
-                                var x2 = value['title'];
-                                print('$x2');
-                                final texto = value['req'][index];
-                                return ListTile(
-                                  title: Text(texto),
-                                  onTap: () {
-                                    // Hacer algo cuando se presiona el elemento de la lista
-                                    Navigator.of(context).pop();
-                                  },
-                                );
-                              },
+                      padding: EdgeInsets.all(25),
+                      decoration: BoxDecoration(
+                          color: isMobile(context)
+                              ? Colors.white
+                              : const Color(0xFF212121),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
+                          )),
+                      height: 550,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              color: Colors.grey.withOpacity(0.3),
+                              height: 5,
+                              width: 60,
                             ),
-                          ),
-                          ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => ApplyScreen(
-                                          vacancy: value,
-                                        )));
-                              },
-                              child:
-                                  Text(AppLocalizations.of(context)!.applyNow),
-                              style: ElevatedButton.styleFrom(
-                                  primary: Color.fromARGB(255, 39, 126, 126))),
-                        ],
+                            // Separación
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                          height: 40,
+                                          padding: EdgeInsets.all(9),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color:
+                                                  Colors.grey.withOpacity(0.1)),
+                                          child: value['logoUrl']
+                                                      .substring(0, 6) ==
+                                                  "assets"
+                                              ? Image.asset(value['logoUrl'])
+                                              : Image.network(value['logoUrl']),
+                                        ),
+                                        SizedBox(width: 20),
+                                        Text(
+                                          value['company'],
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              color: isDesktop(context)
+                                                  ? Colors.white
+                                                  : null),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                            value['isMark']
+                                                ? Icons.bookmark
+                                                : Icons
+                                                    .bookmark_outline_outlined,
+                                            color: value['isMark']
+                                                ? Theme.of(context).primaryColor
+                                                : Colors.black),
+                                        Icon(Icons.more_horiz_outlined,
+                                            color: isDesktop(context)
+                                                ? Colors.white
+                                                : null),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 20),
+                                Text(
+                                  value['title'],
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 26,
+                                      color: isDesktop(context)
+                                          ? Colors.white
+                                          : null),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    IconText(Icons.location_on_outlined,
+                                        value['location']),
+                                    IconText(Icons.access_time_outlined,
+                                        value['time']),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Text(
+                                  AppLocalizations.of(context)!.requirements,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: isDesktop(context)
+                                        ? Colors.white
+                                        : null,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                ...value['req']
+                                    .map((e) => Container(
+                                        margin:
+                                            EdgeInsets.symmetric(vertical: 5),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                top: 10,
+                                              ),
+                                              height: 5,
+                                              width: 5,
+                                              // Lista
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: isDesktop(context)
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            ConstrainedBox(
+                                              constraints: BoxConstraints(
+                                                maxWidth: 300,
+                                              ),
+                                              child: Text(
+                                                e,
+                                                style: TextStyle(
+                                                    wordSpacing: 2.5,
+                                                    height: 1.5,
+                                                    color: isDesktop(context)
+                                                        ? Colors.white
+                                                        : null),
+                                              ),
+                                            )
+                                          ],
+                                        )))
+                                    .toList(),
+                                Container(
+                                  margin: EdgeInsets.symmetric(vertical: 25),
+                                  height: 45,
+                                  width: double.maxFinite,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
