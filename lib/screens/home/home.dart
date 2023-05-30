@@ -1,4 +1,5 @@
 import 'package:examen/constants/colors.dart';
+import 'package:examen/screens/home/aspirantes_page.dart';
 import 'package:examen/screens/profile/profile.dart';
 import 'package:examen/widgets/drawer.dart';
 import 'package:flutter/material.dart';
@@ -84,12 +85,18 @@ class _HomePageState extends State<HomePage> {
             highlightColor: Colors.transparent),
         child: BottomNavigationBar(
           onTap: (value) {
+            print('value -> $value');
             if (value == 4) if (userCredential == "example@gmail.com") {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => PublicarVacanteForm()));
             } else {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => ProfilePage()));
+            }
+
+            if (value == 3) if (userCredential == "example@gmail.com") {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => VacantsList()));
             }
           },
           showSelectedLabels: false,
@@ -115,9 +122,13 @@ class _HomePageState extends State<HomePage> {
             ),
             BottomNavigationBarItem(label: '', icon: Text('')),
             BottomNavigationBarItem(
-              label: 'Chat',
+              label: userCredential == "example@gmail.com"
+                  ? 'Aspirantes'
+                  : 'Eventos',
               icon: Icon(
-                Icons.chat_outlined,
+                userCredential == "example@gmail.com"
+                    ? Icons.work
+                    : Icons.access_alarms,
                 size: 20,
               ),
             ),
