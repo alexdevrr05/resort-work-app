@@ -63,7 +63,7 @@ class _searchList extends State<SearchList> {
                             ),
                             // Separación
                             SizedBox(
-                              height: 30,
+                              height: 1,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,7 +199,7 @@ class _searchList extends State<SearchList> {
                                     .toList(),
                                 Container(
                                   margin: EdgeInsets.symmetric(vertical: 25),
-                                  height: 45,
+                                  // height: 15,
                                   width: double.maxFinite,
                                 ),
                                 ElevatedButton(

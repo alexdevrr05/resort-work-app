@@ -67,25 +67,40 @@ class _ApplyScreenState extends State<ApplyScreen> {
     // Validate the form before saving the data
     if (_formKey.currentState!.validate()) {
       try {
-        // Reference to the Firebase database
-        final databaseDocsRef =
-            FirebaseDatabase.instance.ref().child('documentos').push();
+        final databaseRef = FirebaseDatabase.instance.reference();
 
-        await databaseDocsRef.set({
-          "name": _name,
-          "email": _userEmail,
-          "phone": _phone,
-          "address": _address,
-          "vacantePostulado": {
-            "company": widget.vacancy['company'],
-            "title": widget.vacancy['title'],
-            "logoUrl": widget.vacancy['logoUrl'],
-          }
+        // Create a new document in the "documentos" collection
+        final documentosRef = databaseRef.child('documentos').push();
+
+        await documentosRef.set({
+          'name': _name,
+          'email': _userEmail,
+          'phone': _phone,
+          'address': _address,
+          'vacantePostulado': {
+            'company': widget.vacancy['company'],
+            'title': widget.vacancy['title'],
+            'logoUrl': widget.vacancy['logoUrl'],
+          },
         });
 
-        print("Data saved successfully!");
+        // Add a new aspirante to the "postulaciones" collection
+        final jobsRef = databaseRef
+            .child('postulaciones')
+            .child(widget.vacancy['company'])
+            .push();
+
+        await jobsRef.set({
+          'logoUrl': widget.vacancy['logoUrl'],
+          'aspirante_name': _name,
+          'aspirante_email': _userEmail,
+          'phone': _phone,
+          'address': _address,
+        });
+
+        print('Data saved successfully!');
       } catch (e) {
-        print("Failed to save data: $e");
+        print('Failed to save data: $e');
       }
     }
   }
