@@ -85,7 +85,6 @@ class _HomePageState extends State<HomePage> {
             highlightColor: Colors.transparent),
         child: BottomNavigationBar(
           onTap: (value) {
-            print('value -> $value');
             if (value == 4) if (userCredential == "example@gmail.com") {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => PublicarVacanteForm()));

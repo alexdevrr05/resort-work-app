@@ -31,20 +31,20 @@ class _AspirantesListState extends State<AspirantesList> {
                 aspirante['aspirante_name'] ?? '',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
+                  fontSize: 26,
                 ),
               ),
               SizedBox(height: 10),
               Text(
-                aspirante['aspirante_email'] ?? '',
+                'Email: ' + aspirante['aspirante_email'] ?? '',
                 style: TextStyle(fontSize: 16.0),
               ),
               Text(
-                aspirante['phone'] ?? '',
+                'Celular: ' + aspirante['phone'] ?? '',
                 style: TextStyle(fontSize: 16.0),
               ),
               Text(
-                aspirante['address'] ?? '',
+                'Domicilio: ' + aspirante['address'] ?? '',
                 style: TextStyle(fontSize: 16.0),
               ),
               SizedBox(height: 10),
