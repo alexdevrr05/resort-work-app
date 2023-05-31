@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
 
             if (value == 3) if (userCredential == "example@gmail.com") {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => VacantsList()));
+                  .push(MaterialPageRoute(builder: (context) => SearchPage()));
             }
           },
           showSelectedLabels: false,

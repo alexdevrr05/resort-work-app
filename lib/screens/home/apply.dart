@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:examen/constants/colors.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ApplyScreen extends StatefulWidget {
   final Map<String, dynamic> vacancy;
@@ -23,6 +23,25 @@ class _ApplyScreenState extends State<ApplyScreen> {
   String _address = '';
 
   final FirebaseStorage _storage = FirebaseStorage.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  String? _userEmail;
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentUserEmail();
+  }
+
+  Future<void> _getCurrentUserEmail() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      setState(() {
+        _userEmail = user.email;
+      });
+    }
+  }
+
   Future<void> uploadFile(File file) async {
     try {
       print('File path: ${file.path}'); // Imprimir la ruta del archivo
@@ -49,15 +68,19 @@ class _ApplyScreenState extends State<ApplyScreen> {
     if (_formKey.currentState!.validate()) {
       try {
         // Reference to the Firebase database
-        final databaseRef =
+        final databaseDocsRef =
             FirebaseDatabase.instance.ref().child('documentos').push();
-        await databaseRef.set({
+
+        await databaseDocsRef.set({
           "name": _name,
-          "email": _email,
+          "email": _userEmail,
           "phone": _phone,
           "address": _address,
-          "vacantePostulado":
-              widget.vacancy, // Agrega la información de la vacante aquí
+          "vacantePostulado": {
+            "company": widget.vacancy['company'],
+            "title": widget.vacancy['title'],
+            "logoUrl": widget.vacancy['logoUrl'],
+          }
         });
 
         print("Data saved successfully!");
@@ -115,20 +138,20 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   });
                 },
               ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Email'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  return null;
-                },
-                onChanged: (value) {
-                  setState(() {
-                    _email = value;
-                  });
-                },
-              ),
+              // TextFormField(
+              //   decoration: InputDecoration(labelText: 'Email'),
+              //   validator: (value) {
+              //     if (value == null || value.isEmpty) {
+              //       return 'Please enter your email';
+              //     }
+              //     return null;
+              //   },
+              //   onChanged: (value) {
+              //     setState(() {
+              //       _email = value;
+              //     });
+              //   },
+              // ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Phone'),
                 validator: (value) {

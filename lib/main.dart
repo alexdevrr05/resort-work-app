@@ -1,5 +1,3 @@
-import 'package:examen/screens/home/home.dart';
-import 'package:examen/screens/home/login.dart';
 import 'package:examen/screens/home/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
