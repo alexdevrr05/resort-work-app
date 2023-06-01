@@ -90,8 +90,11 @@ class _AspirantesListState extends State<AspirantesList> {
               itemBuilder: (BuildContext context, int index) {
                 final String title = titles[index];
                 final Map<String, dynamic> record = data[title];
-                final List<Map<String, dynamic>> aspirantes =
-                    record.values.cast<Map<String, dynamic>>().toList();
+                // final List<Map<String, dynamic>> aspirantes =
+                //     record.values.cast<Map<String, dynamic>>().toList();
+                final List<Map<String, dynamic>> aspirantes = record.values
+                    .map((value) => Map<String, dynamic>.from(value as Map))
+                    .toList();
 
                 return ExpansionTile(
                   title: Row(
